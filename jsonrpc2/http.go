@@ -100,8 +100,6 @@ func (conn *httpClientConn) Write(buf []byte) (int, error) {
 			var resp *http.Response
 			resp, err = (&http.Client{}).Do(req)
 			if err != nil {
-			} else if resp.Header.Get("Content-Type") != contentType {
-				err = fmt.Errorf("bad HTTP Content-Type: %s", resp.Header.Get("Content-Type"))
 			} else if resp.StatusCode == http.StatusOK {
 				conn.ready <- resp.Body
 				return
